@@ -34,8 +34,8 @@ public class Converter {
     }
 
 
-    public int convertRomanToArabic(String multiRomanNum) {
-        char[] simpleRomanArray = multiRomanNum.toCharArray();
+    public int convertRomanToArabic(String compositeRoman) {
+        char[] simpleRomanArray = compositeRoman.toCharArray();
         int result = 0;
         for (int i = 0; i < simpleRomanArray.length; i = i + 2) {
             char current = simpleRomanArray[i];
@@ -55,5 +55,46 @@ public class Converter {
             return afterArabic - currentArabic;
         }
         return currentArabic + afterArabic;
+    }
+
+    public String convertArabicToRoman(int compositeArabic) {
+        StringBuffer roman = new StringBuffer();
+        int i=0,v=0,x=0,l=0,c=0,d=0,m=0;
+        if(compositeArabic/1000!=0)m=compositeArabic/1000;
+        for(int count =0;count<m;count++){
+            roman.append(convertSingleArabicToRoman(1000));
+        }
+        compositeArabic %= 1000;
+        if(compositeArabic/500!=0)d=compositeArabic/500;
+        for(int count =0;count<d;count++){
+            roman.append(convertSingleArabicToRoman(500));
+        }
+        compositeArabic %= 500;
+
+        if(compositeArabic/100!=0)c=compositeArabic/100;
+        for(int count =0;count<c;count++){
+            roman.append(convertSingleArabicToRoman(100));
+        }
+        compositeArabic%=100;
+        if(compositeArabic/50!=0)l=compositeArabic/50;
+        for(int count =0;count<l;count++){
+            roman.append(convertSingleArabicToRoman(50));
+        }
+        compositeArabic%=50;
+        if(compositeArabic/10!=0)x=compositeArabic/10;
+        for(int count =0;count<x;count++){
+            roman.append(convertSingleArabicToRoman(10));
+        }
+        compositeArabic%=10;
+        if(compositeArabic/5!=0)v=compositeArabic/5;
+        for(int count =0;count<v;count++){
+            roman.append(convertSingleArabicToRoman(5));
+        }
+        compositeArabic%=5;
+        if(compositeArabic !=0)i=compositeArabic;
+        for(int count =0;count<i;count++){
+            roman.append(convertSingleArabicToRoman(1));
+        }
+        return roman.toString();
     }
 }

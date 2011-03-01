@@ -53,4 +53,12 @@ public class CovertTest {
         int two = new Converter().convertRomanToArabic("IV");
         assertEquals(4, two);
     }
+
+    @Test
+    public void two_should_convert_to_II() {
+        String II = new Converter().convertArabicToRoman(2);
+        assertEquals("II", II);
+        String VI = new Converter().convertArabicToRoman(6);
+        assertEquals("VI", VI);
+    }
 }
