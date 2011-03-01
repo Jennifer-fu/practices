@@ -37,20 +37,23 @@ public class Converter {
     public int convertRomanToArabic(String multiRomanNum) {
         char[] simpleRomanArray = multiRomanNum.toCharArray();
         int result = 0;
-        for (int i = 0; i < simpleRomanArray.length;) {
-            int current = convertSingleRomanToArabic(simpleRomanArray[i]);
-            int after = 0;
+        for (int i = 0; i < simpleRomanArray.length; i = i + 2) {
+            char current = simpleRomanArray[i];
+            char after = 0;
             if (i < simpleRomanArray.length - 1) {
-                after = convertSingleRomanToArabic(simpleRomanArray[i + 1]);
+                after = simpleRomanArray[i + 1];
             }
-            if (after > current) {
-                result += (after - current);
-                i += 2;
-            } else {
-                result += current;
-                i++;
-            }
+            result += convertTwoRomanToArabic(current, after);
         }
         return result;
+    }
+
+    private int convertTwoRomanToArabic(char current, char after) {
+        int currentArabic = convertSingleRomanToArabic(current);
+        int afterArabic = convertSingleRomanToArabic(after);
+        if (afterArabic > currentArabic) {
+            return afterArabic - currentArabic;
+        }
+        return currentArabic + afterArabic;
     }
 }
