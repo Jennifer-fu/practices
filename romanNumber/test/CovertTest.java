@@ -61,4 +61,24 @@ public class CovertTest {
         String VI = new Converter().convertArabicToRoman(6);
         assertEquals("VI", VI);
     }
+
+    @Test
+    public void four_should_convert_to_IV() {
+        String IV = new Converter().convertArabicToRoman(4);
+        assertEquals("IV", IV);
+        String XL = new Converter().convertArabicToRoman(40);
+        assertEquals("XL", XL);
+        String CD = new Converter().convertArabicToRoman(400);
+        assertEquals("CD", CD);
+    }
+
+    @Test
+    public void nine_should_convert_to_IX() {
+        String IX = new Converter().convertArabicToRoman(9);
+        assertEquals("IX", IX);
+        String XC = new Converter().convertArabicToRoman(90);
+        assertEquals("XC", XC);
+        String CM = new Converter().convertArabicToRoman(900);
+        assertEquals("CM", CM);
+    }
 }
