@@ -13,6 +13,17 @@ public class Converter {
         }
     };
 
+    private final HashMap<Integer, String> arabicToCompositeRoman = new HashMap<Integer, String>() {
+        {
+            put(4, "IV");
+            put(9, "IX");
+            put(40, "XL");
+            put(90, "XC");
+            put(400, "CD");
+            put(900, "CM");
+        }
+    };
+
     private final HashMap<Character, Integer> romanToArabic = new HashMap<Character, Integer>() {
         {
             put('I', 1);
@@ -25,8 +36,10 @@ public class Converter {
         }
     };
 
-    public char convertSingleArabicToRoman(int arabicNum) {
-        return arabicToRoman.get(arabicNum);
+    public String convertArabicToStaticRoman(int arabicNum) {
+        Character simpleRoman = arabicToRoman.get(arabicNum);
+        if (simpleRoman != null) return String.valueOf(simpleRoman);
+        return arabicToCompositeRoman.get(arabicNum);
     }
 
     public int convertSingleRomanToArabic(char romanNum) {
@@ -59,67 +72,30 @@ public class Converter {
 
     public String convertArabicToRoman(int compositeArabic) {
         StringBuffer roman = new StringBuffer();
-        int i = 0, v = 0, x = 0, l = 0, c = 0, d = 0, m = 0;
-        if (compositeArabic / 1000 != 0) m = compositeArabic / 1000;
-        for (int count = 0; count < m; count++) {
-            roman.append(convertSingleArabicToRoman(1000));
-        }
-        compositeArabic %= 1000;
-        if (compositeArabic == 900) {
-            roman.append(convertArabicToRoman(100)).append(convertArabicToRoman(1000));
-        } else {
-            if (compositeArabic / 500 != 0) d = compositeArabic / 500;
-            for (int count = 0; count < d; count++) {
-                roman.append(convertSingleArabicToRoman(500));
-            }
-            compositeArabic %= 500;
-
-            if (compositeArabic / 100 != 0) c = compositeArabic / 100;
-            if (c <= 3) {
-                for (int count = 0; count < c; count++) {
-                    roman.append(convertSingleArabicToRoman(100));
-                }
-            } else {
-                roman.append(convertArabicToRoman(100)).append(convertArabicToRoman(500));
-            }
-            compositeArabic %= 100;
-            if (compositeArabic == 90) {
-                roman.append(convertArabicToRoman(10)).append(convertArabicToRoman(100));
-            } else {
-                if (compositeArabic / 50 != 0) l = compositeArabic / 50;
-                for (int count = 0; count < l; count++) {
-                    roman.append(convertSingleArabicToRoman(50));
-                }
-                compositeArabic %= 50;
-                if (compositeArabic / 10 != 0) x = compositeArabic / 10;
-                if (x <= 3) {
-                    for (int count = 0; count < x; count++) {
-                        roman.append(convertSingleArabicToRoman(10));
-                    }
-                } else {
-                    roman.append(convertArabicToRoman(10)).append(convertArabicToRoman(50));
-                }
-                compositeArabic %= 10;
-                if (compositeArabic == 9) {
-                    roman.append(convertArabicToRoman(1)).append(convertArabicToRoman(10));
-                } else {
-                    if (compositeArabic / 5 != 0) v = compositeArabic / 5;
-                    for (int count = 0; count < v; count++) {
-                        roman.append(convertSingleArabicToRoman(5));
-                    }
-                    compositeArabic %= 5;
-
-                    if (compositeArabic != 0) i = compositeArabic;
-                    if (i <= 3) {
-                        for (int count = 0; count < i; count++) {
-                            roman.append(convertSingleArabicToRoman(1));
-                        }
-                    } else {
-                        roman.append(convertArabicToRoman(1)).append(convertArabicToRoman(5));
-                    }
-                }
-            }
-        }
+        int i = 0, v = 0, x = 0, l = 0, c = 0;
+        compositeArabic = generateRoman(compositeArabic, roman, 1000);
+        compositeArabic = generateRoman(compositeArabic, roman, 900);
+        compositeArabic = generateRoman(compositeArabic, roman, 500);
+        compositeArabic = generateRoman(compositeArabic, roman, 400);
+        compositeArabic = generateRoman(compositeArabic, roman, 100);
+        compositeArabic = generateRoman(compositeArabic, roman, 90);
+        compositeArabic = generateRoman(compositeArabic, roman, 50);
+        compositeArabic = generateRoman(compositeArabic, roman, 40);
+        compositeArabic = generateRoman(compositeArabic, roman, 10);
+        compositeArabic = generateRoman(compositeArabic, roman, 9);
+        compositeArabic = generateRoman(compositeArabic, roman, 5);
+        compositeArabic = generateRoman(compositeArabic, roman, 4);
+        generateRoman(compositeArabic, roman, 1);
         return roman.toString();
+    }
+
+    private int generateRoman(int compositeArabic, StringBuffer roman, int simpleArabic) {
+        int m = 0;
+        if (compositeArabic / simpleArabic != 0) m = compositeArabic / simpleArabic;
+        for (int count = 0; count < m; count++) {
+            roman.append(convertArabicToStaticRoman(simpleArabic));
+        }
+        compositeArabic %= simpleArabic;
+        return compositeArabic;
     }
 }

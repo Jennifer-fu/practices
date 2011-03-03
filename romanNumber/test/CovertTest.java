@@ -5,20 +5,20 @@ import static org.junit.Assert.assertEquals;
 public class CovertTest {
     @Test
     public void one_should_convert_to_I() {
-        char romanOne = new Converter().convertSingleArabicToRoman(1);
-        assertEquals('I', romanOne);
-        char romanFive = new Converter().convertSingleArabicToRoman(5);
-        assertEquals('V', romanFive);
-        char romanTen = new Converter().convertSingleArabicToRoman(10);
-        assertEquals('X', romanTen);
-        char romanFifty = new Converter().convertSingleArabicToRoman(50);
-        assertEquals('L', romanFifty);
-        char romanHundred = new Converter().convertSingleArabicToRoman(100);
-        assertEquals('C', romanHundred);
-        char romanFiveHundred = new Converter().convertSingleArabicToRoman(500);
-        assertEquals('D', romanFiveHundred);
-        char romanOneThousand = new Converter().convertSingleArabicToRoman(1000);
-        assertEquals('M', romanOneThousand);
+        String romanOne = new Converter().convertArabicToStaticRoman(1);
+        assertEquals("I", romanOne);
+        String romanFive = new Converter().convertArabicToStaticRoman(5);
+        assertEquals("V", romanFive);
+        String romanTen = new Converter().convertArabicToStaticRoman(10);
+        assertEquals("X", romanTen);
+        String romanFifty = new Converter().convertArabicToStaticRoman(50);
+        assertEquals("L", romanFifty);
+        String romanHundred = new Converter().convertArabicToStaticRoman(100);
+        assertEquals("C", romanHundred);
+        String romanFiveHundred = new Converter().convertArabicToStaticRoman(500);
+        assertEquals("D", romanFiveHundred);
+        String romanOneThousand = new Converter().convertArabicToStaticRoman(1000);
+        assertEquals("M", romanOneThousand);
     }
 
     @Test
@@ -81,4 +81,19 @@ public class CovertTest {
         String CM = new Converter().convertArabicToRoman(900);
         assertEquals("CM", CM);
     }
+
+    @Test
+    public void fifteen_should_convert_to_xv(){
+        String XV = new Converter().convertArabicToRoman(15);
+        assertEquals("XV",XV);
+    }
+
+    @Test
+       public void ninty_one_should_convert_to_XCI() {
+           String XCI = new Converter().convertArabicToRoman(91);
+           assertEquals("XCI", XCI);
+           String CMXI = new Converter().convertArabicToRoman(911);
+           assertEquals("CMXI", CMXI);
+       }
+
 }
