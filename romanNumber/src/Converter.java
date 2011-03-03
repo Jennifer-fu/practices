@@ -38,6 +38,7 @@ public class Converter {
     }
 
     public int convertSingleRomanToArabic(char romanNum) {
+        if(romanNum=='0')return 0;
         return romanToArabic.get(romanNum);
     }
 
@@ -47,7 +48,7 @@ public class Converter {
         int result = 0;
         for (int i = 0; i < simpleRomanArray.length; i = i + 2) {
             char current = simpleRomanArray[i];
-            char after = 0;
+            char after = '0';
             if (i < simpleRomanArray.length - 1) {
                 after = simpleRomanArray[i + 1];
             }
