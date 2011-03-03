@@ -1,26 +1,24 @@
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 public class Converter {
-    private final HashMap<Integer, Character> arabicToRoman = new HashMap<Integer, Character>() {
+    private final HashMap<Integer, String> arabicToRoman = new HashMap<Integer, String>() {
         {
-            put(1, 'I');
-            put(5, 'V');
-            put(10, 'X');
-            put(50, 'L');
-            put(100, 'C');
-            put(500, 'D');
-            put(1000, 'M');
-        }
-    };
-
-    private final HashMap<Integer, String> arabicToCompositeRoman = new HashMap<Integer, String>() {
-        {
-            put(4, "IV");
-            put(9, "IX");
-            put(40, "XL");
-            put(90, "XC");
-            put(400, "CD");
+            put(1000, "M");
             put(900, "CM");
+            put(500, "D");
+            put(400, "CD");
+            put(100, "C");
+            put(90, "XC");
+            put(50, "L");
+            put(40, "XL");
+            put(10, "X");
+            put(9, "IX");
+            put(5, "V");
+            put(4, "IV");
+            put(1, "I");
         }
     };
 
@@ -37,9 +35,7 @@ public class Converter {
     };
 
     public String convertArabicToStaticRoman(int arabicNum) {
-        Character simpleRoman = arabicToRoman.get(arabicNum);
-        if (simpleRoman != null) return String.valueOf(simpleRoman);
-        return arabicToCompositeRoman.get(arabicNum);
+        return arabicToRoman.get(arabicNum);
     }
 
     public int convertSingleRomanToArabic(char romanNum) {
@@ -72,20 +68,11 @@ public class Converter {
 
     public String convertArabicToRoman(int compositeArabic) {
         StringBuffer roman = new StringBuffer();
-        int i = 0, v = 0, x = 0, l = 0, c = 0;
-        compositeArabic = generateRoman(compositeArabic, roman, 1000);
-        compositeArabic = generateRoman(compositeArabic, roman, 900);
-        compositeArabic = generateRoman(compositeArabic, roman, 500);
-        compositeArabic = generateRoman(compositeArabic, roman, 400);
-        compositeArabic = generateRoman(compositeArabic, roman, 100);
-        compositeArabic = generateRoman(compositeArabic, roman, 90);
-        compositeArabic = generateRoman(compositeArabic, roman, 50);
-        compositeArabic = generateRoman(compositeArabic, roman, 40);
-        compositeArabic = generateRoman(compositeArabic, roman, 10);
-        compositeArabic = generateRoman(compositeArabic, roman, 9);
-        compositeArabic = generateRoman(compositeArabic, roman, 5);
-        compositeArabic = generateRoman(compositeArabic, roman, 4);
-        generateRoman(compositeArabic, roman, 1);
+        TreeSet<Integer> staticArabicNumbers = new TreeSet<Integer>(arabicToRoman.keySet());
+        Iterator<Integer> iterator = staticArabicNumbers.descendingIterator();
+        while (iterator.hasNext()){
+            compositeArabic = generateRoman(compositeArabic, roman, iterator.next());
+        }
         return roman.toString();
     }
 
