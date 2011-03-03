@@ -1,6 +1,5 @@
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.SortedSet;
 import java.util.TreeSet;
 
 public class Converter {
@@ -67,22 +66,24 @@ public class Converter {
     }
 
     public String convertArabicToRoman(int compositeArabic) {
-        StringBuffer roman = new StringBuffer();
+        StringBuffer romanNumber = new StringBuffer();
         TreeSet<Integer> staticArabicNumbers = new TreeSet<Integer>(arabicToRoman.keySet());
         Iterator<Integer> iterator = staticArabicNumbers.descendingIterator();
-        while (iterator.hasNext()){
-            compositeArabic = generateRoman(compositeArabic, roman, iterator.next());
+        while (iterator.hasNext()) {
+            Integer simpleArabic = iterator.next();
+            romanNumber.append(generateNextRomanNumber(compositeArabic, simpleArabic));
+            compositeArabic %= simpleArabic;
         }
-        return roman.toString();
+        return romanNumber.toString();
     }
 
-    private int generateRoman(int compositeArabic, StringBuffer roman, int simpleArabic) {
+    private String generateNextRomanNumber(int compositeArabic, int simpleArabic) {
+        StringBuffer romanNumber = new StringBuffer();
         int m = 0;
         if (compositeArabic / simpleArabic != 0) m = compositeArabic / simpleArabic;
         for (int count = 0; count < m; count++) {
-            roman.append(convertArabicToStaticRoman(simpleArabic));
+            romanNumber.append(convertArabicToStaticRoman(simpleArabic));
         }
-        compositeArabic %= simpleArabic;
-        return compositeArabic;
+        return romanNumber.toString();
     }
 }
