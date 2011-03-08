@@ -63,7 +63,7 @@ public class HeapTest {
         assertEquals(expectedString,treeString);
     }
 
-//    @Test
+    @Test
     public void should_print_tree_with_three_layer(){
         String treeString = new Heap(new int[]{12,20,15,29,23}).toString();
         String expectedString =
