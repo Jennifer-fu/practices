@@ -5,9 +5,9 @@ public class MultiLineConverter {
         StringBuffer output = new StringBuffer();
         for (String number : numbers) {
             if (isValidArabic(number)) {
-                output.append(new Converter().convertArabicToRoman(Integer.parseInt(number))).append("\n");
+                output.append(new RomanNumber(Integer.parseInt(number)).toString()).append("\n");
             } else if (isRoman(number)) {
-                output.append(new Converter().convertRomanToArabic(number)).append("\n");
+                output.append(new RomanNumber(number).convertToArabic()).append("\n");
             } else {
                 output.append("N/A").append("\n");
             }
