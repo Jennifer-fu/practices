@@ -37,7 +37,16 @@ namespace FacilitatorGenerator
         {
             var selectedItem = (string) nameList.SelectedItem;
             selectedNameList.Items.Add(selectedItem);
+            nameList.Items.Remove(selectedItem);
             generator.AddPerson(selectedItem);
+        }
+
+        private void unselectButton_Click(object sender, EventArgs e)
+        {
+            var selectedItem = (string)selectedNameList.SelectedItem;
+            selectedNameList.Items.Remove(selectedItem);
+            nameList.Items.Add(selectedItem);
+            generator.RemovePerson(selectedItem);
         }
     }
 }

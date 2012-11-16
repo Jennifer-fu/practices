@@ -34,5 +34,15 @@ namespace FacilitatorGenerator
         public string Presenter { get; private set; }
 
         public string LunchOrder { get; private set; }
+
+        public void RemovePerson(string name)
+        {
+            nameList.Remove(name);
+        }
+
+        public int Attendance()
+        {
+            return nameList.Count;
+        }
     }
 }

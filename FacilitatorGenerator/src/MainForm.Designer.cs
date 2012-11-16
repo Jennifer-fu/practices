@@ -38,6 +38,7 @@
             this.selectButton = new System.Windows.Forms.Button();
             this.presenterLabel = new System.Windows.Forms.Label();
             this.lunchOrderLabel = new System.Windows.Forms.Label();
+            this.unselectButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBox1
@@ -99,7 +100,7 @@
             // 
             // selectButton
             // 
-            this.selectButton.Location = new System.Drawing.Point(119, 102);
+            this.selectButton.Location = new System.Drawing.Point(119, 94);
             this.selectButton.Name = "selectButton";
             this.selectButton.Size = new System.Drawing.Size(38, 23);
             this.selectButton.TabIndex = 7;
@@ -125,11 +126,22 @@
             this.lunchOrderLabel.TabIndex = 9;
             this.lunchOrderLabel.Text = "Nex LunchOrder";
             // 
+            // unselectButton
+            // 
+            this.unselectButton.Location = new System.Drawing.Point(118, 132);
+            this.unselectButton.Name = "unselectButton";
+            this.unselectButton.Size = new System.Drawing.Size(39, 23);
+            this.unselectButton.TabIndex = 10;
+            this.unselectButton.Text = "<=";
+            this.unselectButton.UseVisualStyleBackColor = true;
+            this.unselectButton.Click += new System.EventHandler(this.unselectButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(448, 262);
+            this.Controls.Add(this.unselectButton);
             this.Controls.Add(this.lunchOrderLabel);
             this.Controls.Add(this.presenterLabel);
             this.Controls.Add(this.selectButton);
@@ -159,6 +171,7 @@
         private System.Windows.Forms.Button selectButton;
         private System.Windows.Forms.Label presenterLabel;
         private System.Windows.Forms.Label lunchOrderLabel;
+        private System.Windows.Forms.Button unselectButton;
     }
 }
 

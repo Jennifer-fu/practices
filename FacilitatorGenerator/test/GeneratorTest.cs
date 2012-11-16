@@ -51,5 +51,16 @@ namespace FacilitatorGenerator.test
             Assert.AreEqual("A",generator.Presenter);
             Assert.AreEqual("B",generator.LunchOrder);
         }
+
+        [Test]
+        public void should_support_remove_operation()
+        {
+            generator = new Generator(new RandomNumberGenerator(1));
+            generator.AddPerson("A");
+            Assert.AreEqual(1, generator.Attendance());
+            generator.RemovePerson("A");
+            Assert.AreEqual(0, generator.Attendance());
+            generator.RemovePerson("A");
+        }
     }
 }
