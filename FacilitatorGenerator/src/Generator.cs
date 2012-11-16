@@ -6,11 +6,10 @@ namespace FacilitatorGenerator
     public class Generator
     {
         private readonly IList<string> nameList;
-        private readonly RandomNumberGenerator randomNumberGenerator;
+        private RandomNumberGenerator randomNumberGenerator;
 
-        public Generator(RandomNumberGenerator randomNumberGenerator)
+        public Generator()
         {
-            this.randomNumberGenerator = randomNumberGenerator;
             nameList = new List<string>();
         }
 
@@ -43,6 +42,11 @@ namespace FacilitatorGenerator
         public int Attendance()
         {
             return nameList.Count;
+        }
+
+        public void SetRandomGenerator(RandomNumberGenerator randomNumberGenerator)
+        {
+            this.randomNumberGenerator = randomNumberGenerator;
         }
     }
 }

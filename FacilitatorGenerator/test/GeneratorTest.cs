@@ -14,7 +14,8 @@ namespace FacilitatorGenerator.test
             randomNumberGenerator = new Mock<RandomNumberGenerator>(3);
             int index = 0;
             randomNumberGenerator.Setup(o => o.Next()).Returns(() => index).Callback(() => index++);
-            generator = new Generator(randomNumberGenerator.Object);
+            generator = new Generator();
+            generator.SetRandomGenerator(randomNumberGenerator.Object);
         }
 
         [Test]
@@ -43,7 +44,8 @@ namespace FacilitatorGenerator.test
             randomNumberGenerator = new Mock<RandomNumberGenerator>(randomIndex.Length);
             int index = 0;
             randomNumberGenerator.Setup(o => o.Next()).Returns(() => randomIndex[index]).Callback(() => index++);
-            generator = new Generator(randomNumberGenerator.Object);
+            generator = new Generator();
+            generator.SetRandomGenerator(randomNumberGenerator.Object);
             generator.AddPerson("A");
             generator.AddPerson("B");
             generator.AddPerson("C");
@@ -55,7 +57,8 @@ namespace FacilitatorGenerator.test
         [Test]
         public void should_support_remove_operation()
         {
-            generator = new Generator(new RandomNumberGenerator(1));
+            generator = new Generator();
+            generator.SetRandomGenerator(new RandomNumberGenerator(1));
             generator.AddPerson("A");
             Assert.AreEqual(1, generator.Attendance());
             generator.RemovePerson("A");
