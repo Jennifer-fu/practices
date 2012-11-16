@@ -5,8 +5,8 @@ namespace FacilitatorGenerator
 {
     public class Generator
     {
-        private IList<string> nameList;
-        private RandomNumberGenerator randomNumberGenerator;
+        private readonly IList<string> nameList;
+        private readonly RandomNumberGenerator randomNumberGenerator;
 
         public Generator(RandomNumberGenerator randomNumberGenerator)
         {
@@ -22,8 +22,13 @@ namespace FacilitatorGenerator
         public void Run()
         {
             if (nameList.Count < 2) throw new PersonNotEnoughException();
-            Presenter = nameList[randomNumberGenerator.Next()];
-            LunchOrder = nameList[randomNumberGenerator.Next()];
+            int presenterIndex = randomNumberGenerator.Next();
+            Presenter = nameList[presenterIndex];
+            int lunchOrderIndex;
+            do{
+                lunchOrderIndex = randomNumberGenerator.Next();
+            } while (lunchOrderIndex == presenterIndex);
+            LunchOrder = nameList[lunchOrderIndex];
         }
 
         public string Presenter { get; private set; }
