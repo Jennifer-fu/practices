@@ -22,7 +22,6 @@ namespace FacilitatorGenerator
         private void AddPerson_Button_Click(object sender, EventArgs e)
         {
             string name = textBox1.Text;
-            generator.AddPerson(name);
             textBox1.Text = "";
             nameList.Items.Add(name);
         }
@@ -32,6 +31,13 @@ namespace FacilitatorGenerator
             generator.Run();
             presenter.Text = generator.Presenter;
             lunchOrder.Text = generator.LunchOrder;
+        }
+
+        private void selectButton_Click(object sender, EventArgs e)
+        {
+            var selectedItem = (string) nameList.SelectedItem;
+            selectedNameList.Items.Add(selectedItem);
+            generator.AddPerson(selectedItem);
         }
     }
 }
