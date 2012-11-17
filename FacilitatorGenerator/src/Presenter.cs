@@ -30,5 +30,23 @@ namespace FacilitatorGenerator
             generator.AddPerson(selectedPerson);
         
         }
+
+        public void OnUnSelectPersonButtonClick()
+        {
+            var selectedPerson = view.GetSelectedPerson();
+            view.RemovePersonFromSelectedNameList(selectedPerson);
+            view.AddPersonToNameList(selectedPerson);
+            generator.RemovePerson(selectedPerson);
+
+        }
+
+        public void OnGenerateButtonClick()
+        {
+            var selectedPersonList = view.GetSelectedPersonList();
+            generator.SetRandomGenerator(new RandomNumberGenerator(selectedPersonList.Count));
+            generator.Run();
+            view.ShowPresenter(generator.Presenter);
+            view.ShowLunchOrder(generator.LunchOrder);
+        }
     }
 }

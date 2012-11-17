@@ -34,7 +34,9 @@ namespace FacilitatorGenerator.test
         public void should_not_add_empty_name_to_name_list()
         {
             view.Setup(o => o.GetPersonName()).Returns("");
+            
             presenter.OnAddPersonButtonClick();
+            
             view.Verify(o => o.AddPersonToNameList(It.IsAny<string>()), Times.Never());
             view.Verify(o => o.ResetPersonName(), Times.Once());
         }
@@ -44,10 +46,42 @@ namespace FacilitatorGenerator.test
         {
             const string selectedName = "selected";
             view.Setup(o => o.GetSelectedPerson()).Returns(selectedName);
+            
             presenter.OnSelectPersonButtonClick();
+            
             view.Verify(o=>o.AddPersonToSelectedNameList(selectedName),Times.Once());
             view.Verify(o => o.RemovePersonFromNameList(selectedName), Times.Once());
             Assert.AreEqual(1,generator.Attendance());
+        }
+
+        [Test]
+        public void should_move_person_from_selectedNameList_to_NameList_when_click_left_arrow()
+        {
+            const string selectedName = "selected";
+            generator.AddPerson(selectedName);
+            view.Setup(o => o.GetSelectedPerson()).Returns(selectedName);
+            
+            presenter.OnUnSelectPersonButtonClick();
+            
+            view.Verify(o => o.AddPersonToNameList(selectedName), Times.Once());
+            view.Verify(o => o.RemovePersonFromSelectedNameList(selectedName), Times.Once());
+            Assert.AreEqual(0, generator.Attendance());
+        }
+
+        [Test]
+        public void should_generate_presenter_and_lunchorder_when_click_generate_button()
+        {
+            generator.AddPerson("A");
+            generator.AddPerson("B");
+            generator.AddPerson("C");
+            view.Setup(o => o.GetSelectedPersonList()).Returns(new List<string> {"A","B","C"});
+
+            presenter.OnGenerateButtonClick();
+
+            view.Verify(o => o.GetSelectedPersonList(), Times.Once());
+            view.Verify(o => o.ShowPresenter(generator.Presenter), Times.Once());
+            view.Verify(o => o.ShowLunchOrder(generator.LunchOrder), Times.Once());
+            
         }
     }
 }

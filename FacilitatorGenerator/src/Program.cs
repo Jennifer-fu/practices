@@ -7,15 +7,15 @@ namespace FacilitatorGenerator
 {
     static class Program
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
         [STAThread]
         static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            var view = new MainForm();
+            var presenter = new Presenter(view, new Generator());
+            view.SetPresenter(presenter);
+            Application.Run(view);
         }
     }
 }

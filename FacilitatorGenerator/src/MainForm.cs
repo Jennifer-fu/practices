@@ -1,16 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace FacilitatorGenerator
 {
     public partial class MainForm : Form,IView
     {
-        private readonly Generator generator;
         private Presenter logicPresenter;
         public MainForm()
         {
             InitializeComponent();
-            generator = new Generator();
         }
 
         private void AddPerson_Button_Click(object sender, EventArgs e)
@@ -20,10 +19,7 @@ namespace FacilitatorGenerator
 
         private void generateButton_Click(object sender, EventArgs e)
         {
-            generator.SetRandomGenerator(new RandomNumberGenerator(selectedNameList.Items.Count));
-            generator.Run();
-            presenter.Text = generator.Presenter;
-            lunchOrder.Text = generator.LunchOrder;
+            logicPresenter.OnGenerateButtonClick();
         }
 
         private void selectButton_Click(object sender, EventArgs e)
@@ -33,10 +29,7 @@ namespace FacilitatorGenerator
 
         private void unselectButton_Click(object sender, EventArgs e)
         {
-            var selectedItem = (string) selectedNameList.SelectedItem;
-            selectedNameList.Items.Remove(selectedItem);
-            nameList.Items.Add(selectedItem);
-            generator.RemovePerson(selectedItem);
+            logicPresenter.OnUnSelectPersonButtonClick();
         }
 
         public void AddPersonToNameList(string name)
@@ -46,12 +39,12 @@ namespace FacilitatorGenerator
 
         public string GetPersonName()
         {
-            return textBox1.Text;
+            return personNameTextBox.Text;
         }
 
         public void ResetPersonName()
         {
-            textBox1.Text = "";
+            personNameTextBox.Text = "";
         }
 
         public void SetPresenter(Presenter presenter)
@@ -72,6 +65,26 @@ namespace FacilitatorGenerator
         public void RemovePersonFromNameList(string name)
         {
             nameList.Items.Remove(name);
+        }
+
+        public void RemovePersonFromSelectedNameList(string name)
+        {
+            selectedNameList.Items.Remove(name);
+        }
+
+        public IList<string> GetSelectedPersonList()
+        {
+            return selectedNameList.Items as IList<string>;
+        }
+
+        public void ShowPresenter(string name)
+        {
+            presenter.Text = name;
+        }
+
+        public void ShowLunchOrder(string name)
+        {
+            lunchOrder.Text = name;
         }
     }
 }

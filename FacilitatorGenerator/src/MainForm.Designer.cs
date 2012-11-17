@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.personNameTextBox = new System.Windows.Forms.TextBox();
+            this.addPersonButton = new System.Windows.Forms.Button();
             this.generateButton = new System.Windows.Forms.Button();
             this.presenter = new System.Windows.Forms.TextBox();
             this.lunchOrder = new System.Windows.Forms.TextBox();
@@ -41,22 +41,22 @@
             this.unselectButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // textBox1
+            // personNameTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(12, 230);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 0;
+            this.personNameTextBox.Location = new System.Drawing.Point(12, 230);
+            this.personNameTextBox.Name = "personNameTextBox";
+            this.personNameTextBox.Size = new System.Drawing.Size(100, 20);
+            this.personNameTextBox.TabIndex = 0;
             // 
-            // button1
+            // addPersonButton
             // 
-            this.button1.Location = new System.Drawing.Point(118, 227);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "AddPerson";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.AddPerson_Button_Click);
+            this.addPersonButton.Location = new System.Drawing.Point(118, 227);
+            this.addPersonButton.Name = "addPersonButton";
+            this.addPersonButton.Size = new System.Drawing.Size(75, 23);
+            this.addPersonButton.TabIndex = 1;
+            this.addPersonButton.Text = "AddPerson";
+            this.addPersonButton.UseVisualStyleBackColor = true;
+            this.addPersonButton.Click += new System.EventHandler(this.AddPerson_Button_Click);
             // 
             // generateButton
             // 
@@ -150,8 +150,8 @@
             this.Controls.Add(this.lunchOrder);
             this.Controls.Add(this.presenter);
             this.Controls.Add(this.generateButton);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.addPersonButton);
+            this.Controls.Add(this.personNameTextBox);
             this.Name = "MainForm";
             this.Text = "MainForm";
             this.ResumeLayout(false);
@@ -161,8 +161,8 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox personNameTextBox;
+        private System.Windows.Forms.Button addPersonButton;
         private System.Windows.Forms.Button generateButton;
         private System.Windows.Forms.TextBox presenter;
         private System.Windows.Forms.TextBox lunchOrder;
