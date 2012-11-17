@@ -86,5 +86,10 @@ namespace FacilitatorGenerator
         {
             lunchOrder.Text = name;
         }
+
+        public string GetUnSelectedPerson()
+        {
+            return (string)selectedNameList.SelectedItem;
+        }
     }
 }

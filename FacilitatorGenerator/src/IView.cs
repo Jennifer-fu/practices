@@ -15,5 +15,6 @@ namespace FacilitatorGenerator
         IList<string> GetSelectedPersonList();
         void ShowPresenter(string name);
         void ShowLunchOrder(string lunchOrder);
+        string GetUnSelectedPerson();
     }
 }

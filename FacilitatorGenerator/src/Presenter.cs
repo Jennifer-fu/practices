@@ -25,15 +25,16 @@ namespace FacilitatorGenerator
         public void OnSelectPersonButtonClick()
         {
             var selectedPerson = view.GetSelectedPerson();
+            if (string.IsNullOrEmpty(selectedPerson)) return;
             view.AddPersonToSelectedNameList(selectedPerson);
             view.RemovePersonFromNameList(selectedPerson);
             generator.AddPerson(selectedPerson);
-        
         }
 
         public void OnUnSelectPersonButtonClick()
         {
-            var selectedPerson = view.GetSelectedPerson();
+            var selectedPerson = view.GetUnSelectedPerson();
+            if (string.IsNullOrEmpty(selectedPerson)) return;
             view.RemovePersonFromSelectedNameList(selectedPerson);
             view.AddPersonToNameList(selectedPerson);
             generator.RemovePerson(selectedPerson);
