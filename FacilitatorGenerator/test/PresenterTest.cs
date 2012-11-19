@@ -75,11 +75,11 @@ namespace FacilitatorGenerator.test
             generator.AddPerson("A");
             generator.AddPerson("B");
             generator.AddPerson("C");
-            view.Setup(o => o.GetSelectedPersonList()).Returns(new List<string> {"A","B","C"});
+            view.Setup(o => o.GetSelectedPersonCount()).Returns(3);
 
             presenter.OnGenerateButtonClick();
 
-            view.Verify(o => o.GetSelectedPersonList(), Times.Once());
+            view.Verify(o => o.GetSelectedPersonCount(), Times.Once());
             view.Verify(o => o.ShowPresenter(generator.Presenter), Times.Once());
             view.Verify(o => o.ShowLunchOrder(generator.LunchOrder), Times.Once());
         }

@@ -72,9 +72,9 @@ namespace FacilitatorGenerator
             selectedNameList.Items.Remove(name);
         }
 
-        public IList<string> GetSelectedPersonList()
+        public int GetSelectedPersonCount()
         {
-            return selectedNameList.Items as IList<string>;
+            return selectedNameList.Items.Count;
         }
 
         public void ShowPresenter(string name)

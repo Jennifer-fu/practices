@@ -12,7 +12,7 @@ namespace FacilitatorGenerator
         void AddPersonToSelectedNameList(string name);
         void RemovePersonFromNameList(string name);
         void RemovePersonFromSelectedNameList(string name);
-        IList<string> GetSelectedPersonList();
+        int GetSelectedPersonCount();
         void ShowPresenter(string name);
         void ShowLunchOrder(string lunchOrder);
         string GetUnSelectedPerson();

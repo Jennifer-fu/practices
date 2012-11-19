@@ -43,8 +43,8 @@ namespace FacilitatorGenerator
 
         public void OnGenerateButtonClick()
         {
-            var selectedPersonList = view.GetSelectedPersonList();
-            generator.SetRandomGenerator(new RandomNumberGenerator(selectedPersonList.Count));
+            int selectedPersonCount = view.GetSelectedPersonCount();
+            generator.SetRandomGenerator(new RandomNumberGenerator(selectedPersonCount));
             generator.Run();
             view.ShowPresenter(generator.Presenter);
             view.ShowLunchOrder(generator.LunchOrder);
