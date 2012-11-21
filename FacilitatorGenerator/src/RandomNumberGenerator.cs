@@ -15,7 +15,7 @@ namespace FacilitatorGenerator
 
         public virtual int Next()
         {
-            return random.Next(size - 1);
+            return random.Next(size);
         }
     }
 }
